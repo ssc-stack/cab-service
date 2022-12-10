@@ -32,5 +32,5 @@
 * You can change server port by setting properties in application.properties file i.e.
 * #server.port=8081
 * Only 3 capacities allowed in the system ( 3,4,5), throws exception if not in the range.
-* Database scheme diagram is also present on GitHub.
+* Database scheme diagram is also present in the main directory.
 
