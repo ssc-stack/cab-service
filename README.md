@@ -8,7 +8,7 @@
 * Everything is present in the pom.xml (no need to download any library)
 ## Steps to run cab booking app
 * Download the source code and import in intellijIDEA. Wait for the libraries to get loaded.
-* import the cab_application.db into your database. (present under resources/data/cab_application)
+* import the cab_application.db into your database. (Location: cab_service/cab_application.sql)
 * Go to localhost:8080/
 * Login into the system
 * There are 3 accounts already created for testing purpose:-
@@ -34,5 +34,5 @@
 * You can change server port by setting properties in application.properties file i.e.
 * #server.port=8081
 * Only 3 capacities allowed in the system ( 3,4,5), throws exception if not in the range.
-* Database scheme diagram is also present in the main directory.
+* Database scheme diagram is also present (Location: cab-service/Database Schema Diagram.png.
 
