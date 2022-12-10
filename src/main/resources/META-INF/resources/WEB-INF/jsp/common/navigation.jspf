@@ -6,6 +6,7 @@
 			<li class="nav-item"><a class="nav-link" href="/list-cars"><b>Cars</b></a></li>
 			<li class="nav-item"><a class="nav-link" href="/list-drivers"><b>Drivers</b></a></li>
 			<li class="nav-item"><a class="nav-link" href="/list-car-requests"><b>Car Requests</b></a></li>
+			<li class="nav-item"><a class="nav-link" href="/delete-car-requests"><b>Delete All Car Requests</b></a></li>
 			</sec:authorize>
 			<sec:authorize access="hasAuthority('USER')">
             			<li class="nav-item"><a class="nav-link" href="/list-available-cars?seatingCapacity=3"><b>3-Seater</b></a></li>

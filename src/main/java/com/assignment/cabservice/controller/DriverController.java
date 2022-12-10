@@ -91,8 +91,9 @@ public class DriverController {
         return "listCarRequests";
     }
 
-    @RequestMapping(value="driver/request-car/driverId/{driverId}/carId/{carId}")
-    public String requestNewCar(@PathVariable int driverId,@PathVariable int carId) {
+    //http://localhost:8080/request-car?driverId=102&carId=402
+    @GetMapping(value="request-car")
+    public String requestNewCar(@RequestParam int driverId,@RequestParam int carId) {
         CarRequest newCarRequest=new CarRequest();
         newCarRequest.setDriverId(driverId);
         newCarRequest.setCarId(carId);

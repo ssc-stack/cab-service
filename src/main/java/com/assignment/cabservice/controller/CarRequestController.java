@@ -54,4 +54,10 @@ public class CarRequestController {
         return "redirect:/list-car-requests";
     }
 
+    @RequestMapping("delete-car-requests")
+    public String rejectDriverRequest()  {
+        carRequestRepository.deleteAll();
+        return "redirect:/list-car-requests";
+    }
+
 }
