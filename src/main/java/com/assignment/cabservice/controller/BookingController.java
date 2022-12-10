@@ -28,6 +28,7 @@ public class BookingController {
     @Autowired
     private CarRepository carRepository;
 
+    //http://localhost:8080/book-car?carId=503&username=cust1
     @GetMapping("book-car")
     @ResponseBody
     public BookingDetailDao bookCar(@RequestParam int carId, @RequestParam String username, ModelMap modelMap) {

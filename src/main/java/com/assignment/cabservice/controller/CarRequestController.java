@@ -60,4 +60,12 @@ public class CarRequestController {
         return "redirect:/list-car-requests";
     }
 
+    //localhost:8080/list-car-requests/
+    @RequestMapping("list-car-requests")
+    public String listAllCarRequests(ModelMap modelMap) {
+        List<CarRequest> carRequests=carRequestRepository.findAll();
+        modelMap.put("car_requests",carRequests);
+        return "listCarRequests";
+    }
+
 }

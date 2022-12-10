@@ -7,7 +7,6 @@ import com.assignment.cabservice.model.Driver;
 import com.assignment.cabservice.repository.CarRepository;
 import com.assignment.cabservice.repository.CarRequestRepository;
 import com.assignment.cabservice.repository.DriverRepository;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -70,7 +69,7 @@ public class DriverController {
         carRepository.save(car);
         return "redirect:list-drivers";
     }
-
+    //http://localhost:8080/delete-driver?id=102
     @RequestMapping(value="delete-driver")
     public String deleteDriver(@RequestParam int id) throws Exception {
         Driver driver=driverRepository.findById(id).orElseThrow(() ->
@@ -82,13 +81,6 @@ public class DriverController {
         carRepository.save(car);
         driverRepository.deleteById(id);
         return "redirect:list-drivers";
-    }
-
-    @RequestMapping("list-car-requests")
-    public String listAllCarRequests(ModelMap modelMap) {
-        List<CarRequest> carRequests=carRequestRepository.findAll();
-        modelMap.put("car_requests",carRequests);
-        return "listCarRequests";
     }
 
     //http://localhost:8080/request-car?driverId=102&carId=402

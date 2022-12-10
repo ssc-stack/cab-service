@@ -49,11 +49,12 @@ public class SpringSecurityConfiguration  {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .authorizeHttpRequests().requestMatchers("car-request/**").hasAuthority("ADMIN").and()
-                .authorizeHttpRequests().requestMatchers("assign-car/**").hasAuthority("ADMIN").and()
-                .authorizeHttpRequests().requestMatchers("delete-driver/**").hasAuthority("ADMIN").and()
-                .authorizeHttpRequests().requestMatchers("book-car/**").hasAuthority("USER").and()
-                .authorizeHttpRequests().requestMatchers("cancel-car/**").hasAuthority("USER").and()
+                .authorizeHttpRequests().requestMatchers("/car-request/**").hasAuthority("ADMIN").and()
+                .authorizeHttpRequests().requestMatchers("/assign-car/**").hasAuthority("ADMIN").and()
+                .authorizeHttpRequests().requestMatchers("/delete-driver/**").hasAuthority("ADMIN").and()
+                .authorizeHttpRequests().requestMatchers("/delete-car/**").hasAuthority("ADMIN").and()
+                .authorizeHttpRequests().requestMatchers("/book-car/**").hasAuthority("USER").and()
+                .authorizeHttpRequests().requestMatchers("/cancel-car/**").hasAuthority("USER").and()
                 .authorizeHttpRequests().requestMatchers("/swagger-ui.html").permitAll().and()
                 .authorizeHttpRequests(
                 auth->auth.anyRequest().authenticated());

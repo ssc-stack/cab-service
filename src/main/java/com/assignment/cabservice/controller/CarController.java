@@ -54,6 +54,7 @@ public class CarController {
         return "redirect:list-cars";
     }
 
+    //http://localhost:8080/delete-car?id=502
     @RequestMapping(value="delete-car")
     public String deleteCar(@RequestParam int id) {
         carRepository.deleteById(id);
@@ -61,15 +62,22 @@ public class CarController {
     }
 
 
+
+    //localhost:8080/assign-car/carId/503/driverId/152
     @GetMapping(value="assign-car/carId/{carId}/driverId/{driverId}")
     public String assignDriverToCar(@PathVariable int carId,@PathVariable int driverId) throws Exception {
         Driver driver=driverRepository.findById(driverId).orElseThrow(() ->
                 new Exception("Driver not found with driverID - " + driverId));
+        int previousAssignedCarId=driver.getAssignedCarId();
         driver.setAssignedCarId(carId);
         driver.setUsedCarIds(driver.getUsedCarIds()+","+carId);
+        Car previousAssignedCar=carRepository.findById(previousAssignedCarId).orElseThrow(() ->
+                new Exception("Car not found with carID - " + previousAssignedCarId));;
+        previousAssignedCar.setDriverId(null);
         Car car=carRepository.findById(carId).orElseThrow(() ->
                 new Exception("Car not found with carID - " + carId));;
         car.setDriverId(driverId);
+        carRepository.save(previousAssignedCar);
         carRepository.save(car);
         driverRepository.save(driver);
         return "redirect:/list-cars";
