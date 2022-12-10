@@ -6,7 +6,7 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th>Id</th>
+						<th>RequestId</th>
 						<th>DriverId</th>
 						<th>CarId</th>
 						<th>Request Status</th>
@@ -21,11 +21,12 @@
 							<td>${cr.driverId}</td>
 							<td>${cr.carId}</td>
 							<td>${cr.requestStatus}</td>
-                            <td><a href="delete-car?id=${car.id}" class="btn btn-warning">Approve</a></td>
-                            <td><a href="delete-car?id=${car.id}" class="btn btn-warning">Reject</a></td>
+                            <td><a href="approve-request?requestId=${cr.id}&driverId=${cr.driverId}&carId=${cr.carId}" class="btn btn-warning">Approve</a></td>
+                            <td><a href="reject-request?requestId=${cr.id}" class="btn btn-warning">Reject</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
+
 			</table>
 		</div>
 		<%@ include file="common/footer.jspf" %>

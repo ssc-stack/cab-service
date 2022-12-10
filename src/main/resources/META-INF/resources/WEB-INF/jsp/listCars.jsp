@@ -6,7 +6,7 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th>Id</th>
+						<th>Car Id</th>
 						<th>Model</th>
 						<th>Color</th>
 						<th>Seating Capacity</th>
