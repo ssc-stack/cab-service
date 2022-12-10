@@ -2,9 +2,12 @@ package com.assignment.cabservice.controller;
 
 import com.assignment.cabservice.dao.DriverUseCarsDao;
 import com.assignment.cabservice.model.Car;
+import com.assignment.cabservice.model.CarRequest;
 import com.assignment.cabservice.model.Driver;
 import com.assignment.cabservice.repository.CarRepository;
+import com.assignment.cabservice.repository.CarRequestRepository;
 import com.assignment.cabservice.repository.DriverRepository;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,6 +23,8 @@ public class DriverController {
     private DriverRepository driverRepository;
     @Autowired
     private CarRepository carRepository;
+    @Autowired
+    private CarRequestRepository carRequestRepository;
 
     @RequestMapping("list-drivers")
     public String listAllDrivers(ModelMap modelMap) {
@@ -67,9 +72,33 @@ public class DriverController {
     }
 
     @RequestMapping(value="delete-driver")
-    public String deleteDriver(@RequestParam int id) {
+    public String deleteDriver(@RequestParam int id) throws Exception {
+        Driver driver=driverRepository.findById(id).orElseThrow(() ->
+                new Exception("Driver not found with driverID - " + id));
+        Car car=carRepository.findById(driver.getAssignedCarId()).orElseThrow(() ->
+                new Exception("Car not found with carID - " + driver.getAssignedCarId()));
+        car.setAvailableForBooking(true);
+        car.setDriverId(null);
+        carRepository.save(car);
         driverRepository.deleteById(id);
         return "redirect:list-drivers";
+    }
+
+    @RequestMapping("list-car-requests")
+    public String listAllCarRequests(ModelMap modelMap) {
+        List<CarRequest> carRequests=carRequestRepository.findAll();
+        modelMap.put("car_requests",carRequests);
+        return "listCarRequests";
+    }
+
+    @RequestMapping(value="driver/request-car/driverId/{driverId}/carId/{carId}")
+    public String requestNewCar(@PathVariable int driverId,@PathVariable int carId) {
+        CarRequest newCarRequest=new CarRequest();
+        newCarRequest.setDriverId(driverId);
+        newCarRequest.setCarId(carId);
+        newCarRequest.setRequestStatus("PENDING");
+        carRequestRepository.save(newCarRequest);
+        return "redirect:list-car-requests";
     }
 
 }
